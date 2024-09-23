@@ -1,7 +1,7 @@
 // The entry file of your WebAssembly module.
 
-import {Uint256} from "./uint256";
-import {uint8ArrayToHex, hexToUint8Array, fromUint8Array, uint8ArrayToString} from "./utils";
+import { Uint256 } from "./uint256";
+import { uint8ArrayToHex, hexToUint8Array, fromUint8Array, uint8ArrayToString } from "./utils";
 
 export function add(a: i32, b: i32): i32 {
   testUint256();
