@@ -1,8 +1,50 @@
 // The entry file of your WebAssembly module.
 
 import {Uint256} from "./uint256";
+import {uint8ArrayToHex, hexToUint8Array, fromUint8Array, uint8ArrayToString} from "./utils";
 
 export function add(a: i32, b: i32): i32 {
+  testUint256();
+  testConvert();
+  return a + b;
+}
+
+function testConvert(): void {
+  const original = "0x0100";
+  console.log("original:" + original);
+  const data = hexToUint8Array(original);
+  const hex = uint8ArrayToHex(data);
+  console.log("hex:" + hex);
+
+  const bytesvalue = fromUint8Array<Uint8Array>(data);
+  console.log("bytesvalue:" + uint8ArrayToHex(bytesvalue));
+
+  const u64value = fromUint8Array<u64>(data);
+  console.log("u64value:" + u64value.toString());
+
+  const u32value = fromUint8Array<u32>(data);
+  console.log("u32value:" + u32value.toString());
+
+  const u16value = fromUint8Array<u16>(data);
+  console.log("u16value:" + u16value.toString());
+
+  const u8value = fromUint8Array<u8>(data);
+  console.log("u8value:" + u8value.toString());
+
+  const boolvalue = fromUint8Array<bool>(data);
+  console.log("boolvalue:" + boolvalue.toString());
+
+  const u256Value = fromUint8Array<Uint256>(data);
+  console.log("u256Value:" + u256Value.toHex());
+
+  const strData = hexToUint8Array("68656c6c6f");
+  const str = uint8ArrayToString(strData);
+  console.log("str:" + str);
+  const stringvalue = fromUint8Array<string>(strData);
+  console.log("stringvalue:" + stringvalue);
+}
+
+function testUint256(): void {
   let a1 = new Uint256(17);
   let b1 = new Uint256(1717);
   console.log(a1.toHex());
@@ -26,35 +68,4 @@ export function add(a: i32, b: i32): i32 {
   console.log(f.toHex());
   // let str1 = a1.toUInt64();
   // let str2 = b1.toUInt64();
-  
-  return a + b;
-}
-
-export function hexToUint8Array(hex: string): Uint8Array {
-  if (hex.length % 2 !== 0) {
-    return new Uint8Array(0);
-  }
-  if (hex.startsWith('0x')) {
-    hex = hex.substr(2);
-  }
-  const length = hex.length;
-  const bytes = new Uint8Array(length / 2);
-
-  for (let i: i32 = 0, j: i32 = 0; i < length; i += 2, j++) {
-    bytes[j] = u8.parse(hex.substr(i, 2), 16);
-  }
-
-  return bytes;
-}
-
-export function uint8ArrayToHex(data: Uint8Array, prefix: string = ''): string {
-  const hexChars = '0123456789abcdef';
-  let result = prefix;
-
-  for (let i = 0; i < data.length; i++) {
-    const byte = data[i];
-    result += hexChars.charAt(byte >> 4) + hexChars.charAt(byte & 0x0f);
-  }
-
-  return result;
 }

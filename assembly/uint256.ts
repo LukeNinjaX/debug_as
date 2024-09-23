@@ -234,11 +234,19 @@ export class Uint256 {
     }
 
     public fromUint8Array(bytes: Uint8Array): Uint256  {
+        if (bytes.length > 32) {
+            throw new Error("Input length must be no more than 32");
+        }
+
+        let paddedBytes = new Uint8Array(32);
+        const length = Math.min(bytes.length, 32);
+        paddedBytes.set(bytes.subarray(0, u32(length)), u32(32 - length));
+
         let value = new Uint256();
         for (let i = 0; i < 4; i++) {
             let u64value: u64 = 0;
             for (let j = 0; j < 8; j++) {
-                let byteValue = <u64>(bytes[31 - ((i << 3) + j)]);
+                let byteValue = <u64>(paddedBytes[31 - ((i << 3) + j)]);
                 u64value |= byteValue << (j << 3);
             }
             value.data[i] = u64value;
