@@ -1,6 +1,6 @@
 ---
 name: Report a bug
-about: Something with go-ethereum is not working as expected
+about: Something with artela is not working as expected
 title: ''
 labels: 'type:bug'
 assignees: ''
@@ -8,8 +8,9 @@ assignees: ''
 
 #### System information
 
-Geth version: `geth version`
-CL client & version: e.g. lighthouse/nimbus/prysm@v1.0.0
+Artelad version: `artelad version`
+Aspect-libs version: e.g. @artela/aspect-libs@0.0.36
+Web3 version: e.g. @artela/web3@1.9.24 
 OS & Version: Windows/Linux/OSX
 Commit hash : (if `develop`)
 
