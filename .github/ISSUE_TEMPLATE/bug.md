@@ -1,8 +1,15 @@
+---
+name: Report a bug
+about: Something with go-ethereum is not working as expected
+title: ''
+labels: 'type:bug'
+assignees: ''
+---
+
 #### System information
 
-artelad version: `artelad version`
-@artela/web3 Version: e.g. 1.9.24
-@artela/aspect-libs Version: e.g. 0.0.36 
+Geth version: `geth version`
+CL client & version: e.g. lighthouse/nimbus/prysm@v1.0.0
 OS & Version: Windows/Linux/OSX
 Commit hash : (if `develop`)
 
@@ -22,4 +29,3 @@ Commit hash : (if `develop`)
 ````
 
 When submitting logs: please submit them as text and not screenshots.
-
